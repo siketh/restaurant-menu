@@ -1,0 +1,27 @@
+<html>
+
+<body>
+  <section>
+    <h1>{{restaurant.name}}</h1>
+    <a href="{{url_for('menu', restaurant_id=restaurant.id)}}">Return to Menu</a>
+    <section>
+      <h2>{{menu_item.name}}</h2>
+      <ul>
+        <li>
+          {{menu_item.description}}
+        </li>
+        <li>
+          {{menu_item.price}}
+        </li>
+        <li>
+          {{menu_item.course}}
+        </li>
+      </ul>
+      <a href="#">Edit</a>
+      <a href="#">Delete</a>
+    </section>
+    </li>
+  </section>
+</body>
+
+</html>

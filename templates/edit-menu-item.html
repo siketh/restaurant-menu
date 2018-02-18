@@ -1,0 +1,30 @@
+<html>
+
+<body>
+  <section>
+    <form action="#" id="edit-menu-item-form" method="post">
+      <fieldset>
+        <legend>
+          New Menu Item
+        </legend>
+        <label for="menu-item-name">Name</label>
+        <input type="text" name="name" placeholder="{{menu_item.name}}" id="menu-item-name"
+        />
+        <label for="menu-item-description">Description</label>
+        <input type="text" name="description" placeholder="{{menu_item.description}}" id="menu-item-description"
+        />
+        <label for="menu-item-price">Price</label>
+        <input type="text" name="price" placeholder="{{menu_item.price}}" id="menu-item-price"
+        />
+        <label for="menu-item-course">Course</label>
+        <input type="text" name="course" placeholder="{{menu_item.course}}" id="menu-item-course"
+        />
+        <br />
+        <a href="{{ url_for('menu', restaurant_id=restaurant.id)}}">Cancel</a>
+        <button type="submit" form="edit-menu-item-form">Update</button>
+      </fieldset>
+    </form>
+  </section>
+</body>
+
+</html>

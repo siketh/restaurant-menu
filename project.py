@@ -25,24 +25,34 @@ def deleteRestaurant(restaurant_id):
     return render_template("delete-restaurant.html", restaurant=mock_data.restaurant)
 
 
+@app.route('/restaurants/<int:restaurant_id>/')
+def restaurant(restaurant_id):
+    return render_template("restaurant.html", restaurant=mock_data.restaurant)
+
+
 @app.route('/restaurants/<int:restaurant_id>/menu')
-def restaurantMenu(restaurant_id):
-    return render_template("restaurant-menu.html", restaurant=mock_data.restaurant, menu_items=mock_data.items)
+def menu(restaurant_id):
+    return render_template("menu.html", restaurant=mock_data.restaurant, menu_items=mock_data.items)
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/new')
 def newMenuItem(restaurant_id):
-    return "New menu item"
+    return render_template("new-menu-item.html", restaurant=mock_data.restaurant)
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_item_id>/edit')
 def editMenuItem(restaurant_id, menu_item_id):
-    return "Edit menu item"
+    return render_template("edit-menu-item.html", restaurant=mock_data.restaurant, menu_item=mock_data.item)
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_item_id>/delete')
 def deleteMenuItem(restaurant_id, menu_item_id):
-    return "Delete menu item"
+    return render_template("delete-menu-item.html", restaurant=mock_data.restaurant, menu_item=mock_data.item)
+
+
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_item_id>/')
+def menuItem(restaurant_id, menu_item_id):
+    return render_template("menu-item.html", restaurant=mock_data.restaurant, menu_item=mock_data.item)
 
 
 if __name__ == '__main__':

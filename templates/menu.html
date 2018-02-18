@@ -3,6 +3,8 @@
 <body>
   <section>
     <h1>{{restaurant.name}}</h1>
+    <a href="{{url_for('restaurants')}}">Return to Restaurants</a>
+    <br />
     <a href="#">Create New Menu Item</a> {% for menu_item in menu_items %}
     <section>
       <h2>{{menu_item.name}}</h2>
