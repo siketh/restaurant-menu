@@ -1,0 +1,21 @@
+<html>
+
+<body>
+  <section>
+    <form action="#" id="edit-restaurant-form" method="post">
+      <fieldset>
+        <legend>
+          Edit Restaurant
+        </legend>
+        <label for="restaurant-name">Restaurant Name</label>
+        <input type="text" name="name" id="restaurant-name" placeholder="{{restaurant.name}}"
+        />
+        <br />
+        <a href="{{ url_for('restaurants') }}">Cancel</a>
+        <button type="submit" form="edit-restaurant-form">Update</button>
+      </fieldset>
+    </form>
+  </section>
+</body>
+
+</html>

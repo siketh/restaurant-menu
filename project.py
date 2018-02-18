@@ -10,19 +10,19 @@ def restaurants():
     return render_template("restaurants.html", restaurants=mock_data.restaurants)
 
 
-@app.route('/restaurants/<int:restaurant_id>/new')
-def newRestaurant(restaurant_id):
-    return "New restaurant"
+@app.route('/restaurants/new')
+def newRestaurant():
+    return render_template("new-restaurant.html")
 
 
 @app.route('/restaurants/<int:restaurant_id>/edit')
 def editRestaurant(restaurant_id):
-    return "Edit restaurant"
+    return render_template("edit-restaurant.html", restaurant=mock_data.restaurant)
 
 
 @app.route('/restaurants/<int:restaurant_id>/delete')
 def deleteRestaurant(restaurant_id):
-    return "Delete restaurant"
+    return render_template("delete-restaurant.html", restaurant=mock_data.restaurant)
 
 
 @app.route('/restaurants/<int:restaurant_id>/menu')
