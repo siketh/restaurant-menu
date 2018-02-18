@@ -13,6 +13,38 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 
+# REST API Routes
+
+
+@app.route('/restaurants/JSON')
+def restaurantsJson():
+    restaurants = session.query(Restaurant).all()
+    return jsonify(Restaurants=[restaurant.serialize for restaurant in restaurants])
+
+
+@app.route('/restaurants/<int:restaurant_id>/JSON')
+def restaurantJson(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    return jsonify(Restaurants=[restaurant.serialize])
+
+
+@app.route('/restaurants/<int:restaurant_id>/menu/JSON')
+def menuItemsJson(restaurant_id):
+    menu_items = session.query(MenuItem).filter_by(
+        restaurant_id=restaurant_id).all()
+    return jsonify(MenuItems=[menu_item.serialize for menu_item in menu_items])
+
+
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_item_id>/JSON')
+def menuItemJson(restaurant_id, menu_item_id):
+    menu_item = session.query(MenuItem).filter_by(
+        restaurant_id=restaurant_id, id=menu_item_id).one()
+    return jsonify(MenuItems=[menu_item.serialize])
+
+
+# Page Routes
+
+
 @app.route('/')
 @app.route('/restaurants/')
 def restaurants():
