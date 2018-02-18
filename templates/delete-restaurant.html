@@ -2,7 +2,8 @@
 
 <body>
   <section>
-    <form action="#" id="delete-restaurant-form" method="post">
+    <form action="{{url_for('deleteRestaurant', restaurant_id=restaurant.id)}}" id="delete-restaurant-form"
+      method="post">
       <fieldset>
         <legend>
           Delete Restaurant

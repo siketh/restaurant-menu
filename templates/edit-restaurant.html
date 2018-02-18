@@ -2,7 +2,8 @@
 
 <body>
   <section>
-    <form action="#" id="edit-restaurant-form" method="post">
+    <form action="{{url_for('editRestaurant', restaurant_id=restaurant.id)}}" id="edit-restaurant-form"
+      method="post">
       <fieldset>
         <legend>
           Edit Restaurant
@@ -11,7 +12,7 @@
         <input type="text" name="name" id="restaurant-name" placeholder="{{restaurant.name}}"
         />
         <br />
-        <a href="{{ url_for('restaurants') }}">Cancel</a>
+        <a href="{{ url_for('restaurants')}}">Cancel</a>
         <button type="submit" form="edit-restaurant-form">Update</button>
       </fieldset>
     </form>
