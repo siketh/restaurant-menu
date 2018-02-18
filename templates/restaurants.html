@@ -3,18 +3,13 @@
 <body>
   <section>
     <h1>Restaurants</h1>
-    <a href="#">Create New Restaurant</a>
-    <ul>
-      {% for restaurant in restaurants %}
-      <li>
-        <section>
-          <h2><a href="#">{{restaurant.name}}</a></h2>
-          <a href="#">Edit</a>
-          <a href="#">Delete</a>
-        </section>
-      </li>
-      {% endfor %}
-    </ul>
+    <a href="#">Create New Restaurant</a> {% for restaurant in restaurants %}
+    <section>
+      <h2><a href="#">{{restaurant.name}}</a></h2>
+      <a href="#">Edit</a>
+      <a href="#">Delete</a>
+    </section>
+    {% endfor %}
   </section>
 </body>
 
