@@ -2,7 +2,8 @@
 
 <body>
   <section>
-    <form action="#" id="edit-menu-item-form" method="post">
+    <form action="{{url_for('editMenuItem', restaurant_id=restaurant.id, menu_item_id=menu_item.id)}}"
+      id="edit-menu-item-form" method="post">
       <fieldset>
         <legend>
           New Menu Item

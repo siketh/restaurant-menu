@@ -17,8 +17,8 @@
           {{menu_item.course}}
         </li>
       </ul>
-      <a href="#">Edit</a>
-      <a href="#">Delete</a>
+      <a href="{{url_for('editMenuItem', restaurant_id=restaurant.id, menu_item_id=menu_item.id)}}">Edit</a>
+      <a href="{{url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_item_id=menu_item.id)}}">Delete</a>
     </section>
     </li>
   </section>
