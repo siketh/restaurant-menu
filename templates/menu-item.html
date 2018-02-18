@@ -8,13 +8,13 @@
       <h2>{{menu_item.name}}</h2>
       <ul>
         <li>
-          {{menu_item.description}}
+          Description: {{menu_item.description}}
         </li>
         <li>
-          {{menu_item.price}}
+          Price: {{menu_item.price}}
         </li>
         <li>
-          {{menu_item.course}}
+          Course: {{menu_item.course}}
         </li>
       </ul>
       <a href="{{url_for('editMenuItem', restaurant_id=restaurant.id, menu_item_id=menu_item.id)}}">Edit</a>
