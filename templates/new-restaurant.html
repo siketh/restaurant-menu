@@ -1,20 +1,22 @@
-<html>
-
-<body>
-  <section>
-    <form action="{{url_for('newRestaurant')}}" id="new-restaurant-form" method="post">
-      <fieldset>
-        <legend>
-          New Restaurant
-        </legend>
-        <label for="restaurant-name">Restaurant Name</label>
-        <input type="text" name="name" id="restaurant-name" />
-        <br />
-        <a href="{{ url_for('restaurants') }}">Cancel</a>
-        <button type="submit" form="new-restaurant-form">Create</button>
-      </fieldset>
-    </form>
-  </section>
-</body>
-
-</html>
+{% extends "layout.html" %} {% block body %}
+<div class="row">
+  <div class="col-sm-12">
+    <section>
+      <form action="{{url_for('newRestaurant')}}" id="new-restaurant-form" method="post">
+        <fieldset>
+          <legend>
+            New Restaurant
+          </legend>
+          <div class="form-group">
+            <label for="restaurant-name">Restaurant Name</label>
+            <input class="form-control" type="text" name="name" id="restaurant-name" />
+          </div>
+          <br />
+          <a class="btn btn-secondary" href="{{ url_for('restaurants') }}">Cancel</a>
+          <button class="btn btn-primary" type="submit" form="new-restaurant-form">Create</button>
+        </fieldset>
+      </form>
+    </section>
+  </div>
+</div>
+{% endblock %}

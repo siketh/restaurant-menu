@@ -1,22 +1,23 @@
-<html>
-
-<body>
-  <section>
-    <form action="{{url_for('editRestaurant', restaurant_id=restaurant.id)}}" id="edit-restaurant-form"
-      method="post">
-      <fieldset>
-        <legend>
-          Edit Restaurant
-        </legend>
-        <label for="restaurant-name">Restaurant Name</label>
-        <input type="text" name="name" id="restaurant-name" placeholder="{{restaurant.name}}"
-        />
-        <br />
-        <a href="{{ url_for('restaurants')}}">Cancel</a>
-        <button type="submit" form="edit-restaurant-form">Update</button>
-      </fieldset>
-    </form>
-  </section>
-</body>
-
-</html>
+{% extends "layout.html" %} {% block body %}
+<div class="row">
+  <div class="col-sm-12">
+    <section>
+      <form action="{{url_for('editRestaurant', restaurant_id=restaurant.id)}}" id="edit-restaurant-form"
+        method="post">
+        <fieldset>
+          <legend>
+            Edit Restaurant
+          </legend>
+          <div class="form-group">
+            <label for="restaurant-name">Restaurant Name</label>
+            <input class="form-control" type="text" name="name" id="restaurant-name" placeholder="{{restaurant.name}}"
+            />
+          </div>
+          <a class="btn btn-secondary" href="{{ url_for('restaurants')}}">Cancel</a>
+          <button class="btn btn-primary" type="submit" form="edit-restaurant-form">Update</button>
+        </fieldset>
+      </form>
+    </section>
+  </div>
+</div>
+{% endblock %}

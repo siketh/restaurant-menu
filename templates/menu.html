@@ -1,30 +1,62 @@
-<html>
-
-<body>
-  <section>
-    <h1>{{restaurant.name}}</h1>
-    <a href="{{url_for('restaurants')}}">Return to Restaurants</a>
-    <br />
-    <a href="{{url_for('newMenuItem', restaurant_id=restaurant.id)}}">Create New Menu Item</a>    {% for menu_item in menu_items %}
+{% extends "layout.html" %} {% block body %}
+<div class="row">
+  <div class="col-sm-12">
     <section>
-      <h2>{{menu_item.name}}</h2>
-      <ul>
-        <li>
-          Description: {{menu_item.description}}
-        </li>
-        <li>
-          Price: {{menu_item.price}}
-        </li>
-        <li>
-          Course: {{menu_item.course}}
-        </li>
-      </ul>
-      <a href="{{url_for('editMenuItem', restaurant_id=restaurant.id, menu_item_id=menu_item.id)}}">Edit</a>
-      <a href="{{url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_item_id=menu_item.id)}}">Delete</a>
+      <h1>{{restaurant.name}}</h1>
+      <a class="btn btn-secondary" href="{{url_for('restaurants')}}">Return to Restaurants</a>
+      <a class="btn btn-primary" href="{{url_for('newMenuItem', restaurant_id=restaurant.id)}}">Create New Menu Item</a>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              ID
+            </th>
+            <th>
+              Name
+            </th>
+            <th>
+              Description
+            </th>
+            <th>
+              Price
+            </th>
+            <th>
+              Course
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for menu_item in menu_items %}
+          <tr>
+            <td>
+              {{menu_item.id}}
+            </td>
+            <td>
+              {{menu_item.name}}
+            </td>
+            <td>
+              {{menu_item.description}}
+            </td>
+            <td>
+              {{menu_item.price}}
+            </td>
+            <td>
+              {{menu_item.course}}
+            </td>
+            <td>
+              <a class="btn btn-primary" href="{{url_for('editMenuItem', restaurant_id=restaurant.id, menu_item_id=menu_item.id)}}">Edit</a>
+              <a class="btn btn-danger" href="{{url_for('deleteMenuItem', restaurant_id=restaurant.id, menu_item_id=menu_item.id)}}">Delete</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </section>
     </li>
-    {% endfor %}
-  </section>
-</body>
-
-</html>
+    </section>
+  </div>
+</div>
+{% endblock %}}

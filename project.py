@@ -1,5 +1,6 @@
 from database_setup import Base, MenuItem, Restaurant
-from flask import Flask, jsonify, redirect, render_template, request, url_for
+from flask import (Flask, flash, jsonify, redirect, render_template, request,
+                   url_for)
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -47,8 +48,13 @@ def menuItemJson(restaurant_id, menu_item_id):
 
 @app.route('/')
 @app.route('/restaurants/')
-def restaurants():
-    restaurants = session.query(Restaurant)
+@app.route('/restaurants/<int:restaurant_id>/')
+def restaurants(restaurant_id=None):
+    if restaurant_id is None:
+        restaurants = session.query(Restaurant)
+    else:
+        restaurants = session.query(
+            Restaurant).filter_by(id=restaurant_id)
     return render_template("restaurants.html", restaurants=restaurants)
 
 
@@ -60,6 +66,8 @@ def newRestaurant():
 
         session.add(new_restaurant)
         session.commit()
+
+        flash("New restaurant created successfully!")
 
         return redirect(url_for('restaurants'))
     elif request.method == "GET":
@@ -80,6 +88,8 @@ def editRestaurant(restaurant_id):
         session.add(restaurant)
         session.commit()
 
+        flash("Edited restaurant successfully!")
+
         return redirect(url_for('restaurants'))
     elif request.method == "GET":
         restaurant = session.query(
@@ -98,6 +108,8 @@ def deleteRestaurant(restaurant_id):
         session.delete(restaurant)
         session.commit()
 
+        flash("Deleted restaurant successfully!")
+
         return redirect(url_for('restaurants'))
     elif request.method == "GET":
         restaurant = session.query(
@@ -107,16 +119,18 @@ def deleteRestaurant(restaurant_id):
         return "Request method [{}] not supported!".format(request.method)
 
 
-@app.route('/restaurants/<int:restaurant_id>/')
-def restaurant(restaurant_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
-    return render_template("restaurant.html", restaurant=restaurant)
-
-
 @app.route('/restaurants/<int:restaurant_id>/menu')
-def menu(restaurant_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
-    menu_items = session.query(MenuItem).filter_by(restaurant_id=restaurant_id)
+@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_item_id>/')
+def menu(restaurant_id, menu_item_id=None):
+    restaurant = session.query(
+        Restaurant).filter_by(id=restaurant_id).one()
+
+    if menu_item_id is None:
+        menu_items = session.query(MenuItem).filter_by(
+            restaurant_id=restaurant_id)
+    else:
+        menu_items = session.query(MenuItem).filter_by(
+            restaurant_id=restaurant_id, id=menu_item_id)
 
     return render_template("menu.html", restaurant=restaurant, menu_items=menu_items)
 
@@ -134,6 +148,8 @@ def newMenuItem(restaurant_id):
 
         session.add(new_menu_item)
         session.commit()
+
+        flash("New menu item created successfully!")
 
         return redirect(url_for('menu', restaurant_id=restaurant_id))
     elif request.method == "GET":
@@ -163,6 +179,8 @@ def editMenuItem(restaurant_id, menu_item_id):
         session.add(menu_item)
         session.commit()
 
+        flash("Edited menu item successfully!")
+
         return redirect(url_for('menu', restaurant_id=restaurant_id))
     elif request.method == "GET":
         restaurant = session.query(
@@ -184,6 +202,8 @@ def deleteMenuItem(restaurant_id, menu_item_id):
         session.delete(menu_item)
         session.commit()
 
+        flash("Deleted menu item successfully!")
+
         return redirect(url_for('menu', restaurant_id=restaurant_id))
     elif request.method == "GET":
         restaurant = session.query(
@@ -196,15 +216,7 @@ def deleteMenuItem(restaurant_id, menu_item_id):
         return "Request method [{}] not supported!".format(request.method)
 
 
-@app.route('/restaurants/<int:restaurant_id>/menu/<int:menu_item_id>/')
-def menuItem(restaurant_id, menu_item_id):
-    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
-    menu_item = session.query(MenuItem).filter_by(
-        restaurant_id=restaurant_id, id=menu_item_id).one()
-
-    return render_template("menu-item.html", restaurant=restaurant, menu_item=menu_item)
-
-
 if __name__ == '__main__':
     app.debug = True
+    app.secret_key = "secretkey"
     app.run(host='0.0.0.0', port=5000)
